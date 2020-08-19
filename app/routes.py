@@ -1,3 +1,5 @@
+#coding=utf-8
+
 from flask import render_template, flash, redirect, url_for
 from app import flask_app
 from app.forms import LoginForm
