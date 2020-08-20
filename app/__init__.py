@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 
 flask_app = Flask(__name__)
 flask_app.config.from_object(Config)
-print(flask_app.config)
+#print(flask_app.config)
 db = SQLAlchemy(flask_app)
 migrate = Migrate(flask_app, db)
 
