@@ -3,36 +3,41 @@
 from flask import render_template, flash, redirect, url_for
 from app import flask_app
 from app.forms import LoginForm
+from flask_login import current_user, login_user
+from app.models import User
 
 count = 0
 
 @flask_app.route('/')
 @flask_app.route('/index')
 def index():
-    global count
-    count += 1
-    user = {'username': 'Sid'}
-    user['count'] = str(count)
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='home', user=user, posts=posts)
+	global count
+	count += 1
+	user = {'username': 'Sid'}
+	user['count'] = str(count)
+	posts = [
+		{
+			'author': {'username': 'John'},
+			'body': 'Beautiful day in Portland!'
+		},
+		{
+			'author': {'username': 'Susan'},
+			'body': 'The Avengers movie was so cool!'
+		}
+	]
+	return render_template('index.html', title='home', user=user, posts=posts)
 
 @flask_app.route('/login', methods=['GET', 'POST'])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('index'))
 	form = LoginForm()
 	if form.validate_on_submit():
-		msg = 'Login requested for user {}, remember_me={}'.format(
-			form.username.data, form.remember_me.data)
-		print(msg)
-		flash(msg)
+		user = User.query.filter_by(username=form.username.data).first()
+		if user is None or not user.check_password(form.password.data):
+			flash('Invalide username or password')
+			return redirect(url_for('login'))
+		login_user(user, remember=form.remember_me.data)
 		return redirect(url_for('index'))
 	return render_template('login.html', title='Sign In', form=form)
 
