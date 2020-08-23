@@ -4,7 +4,7 @@
 <h1>Hi, {{ current_user.username }} {{ user.count }}!</h1>
 
     {% for post in posts %}
-    <div><p xmlns:margin:0; xmlns:padding:0;>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
 
     <p ><h2>display using p before, the following displayed with br</h2></p>
