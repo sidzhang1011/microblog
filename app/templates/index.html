@@ -1,10 +1,10 @@
 {% extends "base.html" %}
         
 {% block content %}
-    <h1>Hello, {{ user.username }} {{ user.count }}!</h1>
+<h1>Hi, {{ current_user.username }} {{ user.count }}!</h1>
 
     {% for post in posts %}
-    <div><p margin:0; padding:0;>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    <div><p xmlns:margin:0; xmlns:padding:0;>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
 
     <p ><h2>display using p before, the following displayed with br</h2></p>

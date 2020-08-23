@@ -15,7 +15,7 @@ count = 0
 def index():
 	global count
 	count += 1
-	user = {'username': 'Sid'}
+	user = {}
 	user['count'] = str(count)
 	posts = [
 		{
@@ -27,7 +27,7 @@ def index():
 			'body': 'The Avengers movie was so cool!'
 		}
 	]
-	return render_template('index.html', title='home', user=user, posts=posts)
+	return render_template('index.html', title='Home Page', user=user, posts=posts)
 
 @flask_app.route('/login', methods=['GET', 'POST'])
 def login():
