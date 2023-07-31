@@ -75,7 +75,7 @@ def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
 	page = request.args.get('page', 1, type=int)
 	posts = user.posts.order_by(Post.timestamp.desc()).paginate(
-		page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+		page=page, per_page=flask_app.config['POSTS_PER_PAGE'], error_out=False)
 	next_url = url_for('user', username=user.username, page=posts.next_num) \
 		if posts.has_next else None
 	prev_url = url_for('user', username=user.username, page=posts.prev_num) \
