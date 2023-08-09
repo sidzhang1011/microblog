@@ -133,3 +133,7 @@ dmypy.json
 
 # db
 app.db
+
+# logs
+logs/
+.flaskenv
