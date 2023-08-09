@@ -32,7 +32,7 @@ if not flask_app.debug:
             secure = ()
         mail_handler = SMTPHandler(
             mailhost=(flask_app.config['MAIL_SERVER'], flask_app.config['MAIL_PORT']),
-            fromaddr='no-reply@' + flask_app.config['MAIL_SERVER'],
+            fromaddr=flask_app.config['MAIL_USERNAME'],
             toaddrs=flask_app.config['ADMINS'], subject='Microblog Failure',
             credentials=auth, secure=secure)
         mail_handler.setLevel(logging.ERROR)
