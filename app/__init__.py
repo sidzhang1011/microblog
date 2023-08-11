@@ -19,6 +19,7 @@ db = SQLAlchemy(flask_app)
 migrate = Migrate(flask_app, db)
 login = LoginManager(flask_app)
 login.login_view = 'login'
+mail = Mail(flask_app)
 
 from app import routes, models, errors
 
